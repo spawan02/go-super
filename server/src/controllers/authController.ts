@@ -10,7 +10,7 @@ export const signup = async (req: Request, res: Response) => {
     const validation = userSchema.safeParse(req.body);
     if (!validation.success) {
         res.status(400).json({
-            message: "Invalid Entry",
+            message: "Invalid Entry"
         });
         return;
     }
@@ -39,7 +39,7 @@ export const signup = async (req: Request, res: Response) => {
 
         res.status(201).json({
             message: "user registered",
-            userId: user.userId,
+            userId: user.id,
         });
     } catch (e: any) {
         res.status(400).json({
