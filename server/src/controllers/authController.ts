@@ -81,3 +81,26 @@ export const login = async (req: Request, res: Response) => {
         });
     }
 };
+
+
+
+export const validateToken = async (req: Request, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: (req as any).userId },
+      select: {
+        id: true,
+        email: true,
+      },
+    })
+
+    if (!user) {
+      res.status(404).json({ message: "User not found" })
+      return
+    }
+
+    res.status(200).json({ user })
+  } catch (err) {
+    res.status(500).json({ message: "Server error" })
+  }
+}
