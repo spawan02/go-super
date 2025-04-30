@@ -39,7 +39,13 @@ export const addExpense = async (req: Request, res: Response) => {
             },
         });
 
-        res.status(201).json(expense);
+        res.status(201).json({expenses: {
+            id: expense.id,
+            amount: expense.amount,
+            category: expense.category,
+            description: expense.description,
+            createdAt: expense.createdAt
+        }});
     } catch (err: any) {
         res.status(400).json({ error: err.message });
     }

@@ -74,7 +74,12 @@ export const login = async (req: Request, res: Response) => {
         }
         const payload = { userId: user.id };
         const token = jwt.sign(payload, JWT_PASSWORD);
-        res.status(200).json({ token });
+        res.status(200).json({ token, 
+            user:{
+                id: user.id,
+                email: user.email
+            } ,
+        });
     } catch (e) {
         res.status(400).json({
             message: "Internal Error",
@@ -99,7 +104,7 @@ export const validateToken = async (req: Request, res: Response) => {
       return
     }
 
-    res.status(200).json({ user })
+    res.status(200).json({ user: user })
   } catch (err) {
     res.status(500).json({ message: "Server error" })
   }
