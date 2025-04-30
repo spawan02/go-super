@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react"
-import api from "../api/axios"
-import { User } from "../types"
-import { showLoginSuccess, showLogout } from "../utils/toastUtils"
+import { useEffect, useState } from 'react'
+import api from '../api/axios'
+import { User } from '../types'
+import { showLoginSuccess, showLogout } from '../utils/toastUtils'
 
 interface getRoute {
-    user: User
+  user: User
 }
 export const useAuth = () => {
   const [user, setUser] = useState<User | null>(null)
@@ -13,16 +13,16 @@ export const useAuth = () => {
   useEffect(() => {
     const validateUser = async () => {
       try {
-        const res = await api.get<getRoute>("/auth/validate")
+        const res = await api.get<getRoute>('/auth/validate')
         setUser(res.data.user)
       } catch (err) {
-        localStorage.removeItem("token")
+        localStorage.removeItem('token')
       } finally {
         setLoading(false)
       }
     }
 
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem('token')
     if (token) {
       validateUser()
     } else {
@@ -31,13 +31,13 @@ export const useAuth = () => {
   }, [])
 
   const handleLogin = (userData: User, token: string) => {
-    localStorage.setItem("token", token)
+    localStorage.setItem('token', token)
     setUser(userData)
     showLoginSuccess(userData.email)
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("token")
+    localStorage.removeItem('token')
     setUser(null)
     showLogout()
   }

@@ -1,27 +1,21 @@
-"use client"
+'use client'
 
-import React, { useState } from "react"
-import { Button } from "./ui/button"
-import { Input } from "./ui/input"
-import { Label } from "./ui/label"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select"
-import { Textarea } from "./ui/textarea"
-import type { Expense } from "../types"
+import React, { useState } from 'react'
+import { Button } from './ui/button'
+import { Input } from './ui/input'
+import { Label } from './ui/label'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select'
+import { Textarea } from './ui/textarea'
+import type { Expense } from '../types'
 
 interface ExpenseFormProps {
-  onAddExpense: (expense: Omit<Expense, "id" | "date">) => void
+  onAddExpense: (expense: Omit<Expense, 'id' | 'date'>) => void
 }
 
 const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAddExpense }) => {
-  const [amount, setAmount] = useState("")
-  const [category, setCategory] = useState<"Income" | "Expense" | "">("")
-  const [description, setDescription] = useState("")
+  const [amount, setAmount] = useState('')
+  const [category, setCategory] = useState<'Income' | 'Expense' | ''>('')
+  const [description, setDescription] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -31,7 +25,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAddExpense }) => {
 
     setLoading(true)
 
-    const newExpense: Omit<Expense, "id"| "date"> = {
+    const newExpense: Omit<Expense, 'id' | 'date'> = {
       amount: parseFloat(amount),
       category,
       description,
@@ -39,9 +33,9 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAddExpense }) => {
 
     onAddExpense(newExpense)
 
-    setAmount("")
-    setCategory("")
-    setDescription("")
+    setAmount('')
+    setCategory('')
+    setDescription('')
     setLoading(false)
   }
 
@@ -62,7 +56,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAddExpense }) => {
 
       <div className="space-y-2">
         <Label htmlFor="category">Category*</Label>
-        <Select value={category} onValueChange={(val) => setCategory(val as "Income" | "Expense")}>
+        <Select value={category} onValueChange={(val) => setCategory(val as 'Income' | 'Expense')}>
           <SelectTrigger id="category">
             <SelectValue placeholder="Select category" />
           </SelectTrigger>
@@ -84,7 +78,7 @@ const ExpenseForm: React.FC<ExpenseFormProps> = ({ onAddExpense }) => {
       </div>
 
       <Button type="submit" className="w-full" disabled={loading || !amount || !category}>
-        {loading ? "Adding..." : "Add Transaction"}
+        {loading ? 'Adding...' : 'Add Transaction'}
       </Button>
     </form>
   )

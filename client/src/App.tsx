@@ -1,9 +1,9 @@
-"use client"
+'use client'
 
-import { useAuth } from "./hooks/useAuth"
-import { BrowserRouter as Router } from "react-router-dom"
-import AppRoutes from "./routes/AppRoute"
-import { Toaster } from "sonner"
+import { useAuth } from './hooks/useAuth'
+import { BrowserRouter as Router } from 'react-router-dom'
+import AppRoutes from './routes/AppRoute'
+import { Toaster } from 'sonner'
 
 function App() {
   const { user, loading, handleLogin, handleLogout } = useAuth()

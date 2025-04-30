@@ -1,14 +1,14 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "./ui/card"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { Label } from "./ui/label"
-import { toast } from "sonner"
-import api from "../api/axios"
-import type { User } from "../types"
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
+import { Label } from './ui/label'
+import { toast } from 'sonner'
+import api from '../api/axios'
+import type { User } from '../types'
 
 interface LoginProps {
   onLogin: (user: User, token: string) => void
@@ -20,16 +20,16 @@ interface LoginResponse {
 }
 
 export default function Login({ onLogin }: LoginProps) {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!email || !password) {
-      toast("Error", {
-        description: "Please fill in all fields",
+      toast('Error', {
+        description: 'Please fill in all fields',
       })
       return
     }
@@ -37,15 +37,16 @@ export default function Login({ onLogin }: LoginProps) {
     setLoading(true)
 
     try {
-      const response = await api.post<LoginResponse>("/auth/login", {
+      const response = await api.post<LoginResponse>('/auth/login', {
         email,
         password,
       })
 
       onLogin(response.data.user, response.data.token)
     } catch (error: any) {
-      toast("Login Failed", {
-        description: error?.response?.data?.message || error.message || "An error occurred during login",
+      toast('Login Failed', {
+        description:
+          error?.response?.data?.message || error.message || 'An error occurred during login',
       })
     } finally {
       setLoading(false)
@@ -85,13 +86,13 @@ export default function Login({ onLogin }: LoginProps) {
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
+              {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-center text-gray-500">
-            Don't have an account?{" "}
+            Don't have an account?{' '}
             <Link to="/register" className="text-blue-600 hover:text-blue-800">
               Register
             </Link>
