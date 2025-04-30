@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { userSchema } from "../validation/userSchema";
+import { userSchema } from "../validation/loginSchema";
 import { comparePassword, hashPassword } from "../utils";
 import prisma from "../lib/prisma";
 import jwt from "jsonwebtoken";
