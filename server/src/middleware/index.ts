@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { Jwt } from "jsonwebtoken";
 import dotenv from "dotenv";
+import { JwtPayload } from "../interface";
 dotenv.config();
 
-const JWT_PASSWORD = process.env.JWT_PASSWORD as string;
-export interface JwtPayload {
-    userId: string;
-}
+const JWT_PASSWORD = process.env.JWT_PASSWORD as string ||  "password"
+
 
 export const userMiddleware = (
     req: Request,
@@ -14,7 +13,6 @@ export const userMiddleware = (
     next: NextFunction
 ) => {
     const header = req.header("authorization");
-    // console.log(header);
     const token = header?.split(" ")[1];
 
     if (!token) {

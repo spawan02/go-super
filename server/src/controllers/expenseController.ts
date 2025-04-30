@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import prisma from "../lib/prisma";
 import { expenseSchema } from "../validation/expenseSchema";
-import { Transaction } from "../types/transaction";
+import { Transaction } from "../interface/index";
 
 export const listExpenses = async (req: Request, res: Response) => {
     try {
@@ -29,7 +29,6 @@ export const listExpenses = async (req: Request, res: Response) => {
 export const addExpense = async (req: Request, res: Response) => {
     try {
         const { amount, category, description } = expenseSchema.parse(req.body);
-        const userId = (req as any).userId;
 
         const expense = await prisma.expense.create({
             data: {

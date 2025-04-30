@@ -9,7 +9,7 @@ router.get("/", (_, res) => {
     });
 });
 
-router.use("/", expenseRoutes);
+router.use("/expenses", expenseRoutes);
 router.use("/auth", authRoutes);
 
 export default router;
