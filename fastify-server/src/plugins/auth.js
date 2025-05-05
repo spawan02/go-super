@@ -1,20 +1,3 @@
-import jwt from 'jsonwebtoken';
-require('dotenv').config();
-
-const JWT_PASSWORD = process.env.JWT_PASSWORD || 'password';  
-
-
-const verifyJwt = (token, secret) => {
-  return new Promise((resolve, reject) => {
-    jwt.verify(token, secret, (err, decoded) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(decoded);
-      }
-    });
-  });
-};
 
 export default async function (fastify) {
   fastify.decorate('authenticate', async function (request, reply) {
@@ -26,7 +9,8 @@ export default async function (fastify) {
     }
 
     try {
-      const decoded = await verifyJwt(token, JWT_PASSWORD);
+
+      const decoded = await fastify.jwt.verify(token);
       request.userId = decoded.userId
     } catch (error) {
       reply.code(500).send({ message: 'Internal Server Error' });
