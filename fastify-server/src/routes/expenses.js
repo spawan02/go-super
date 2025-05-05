@@ -1,5 +1,4 @@
 import { expenseSchema } from "../schemas/expenseSchema";
-import authenticate from "../middleware";
 
 export default async function (fastify) {
     fastify.get(
