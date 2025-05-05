@@ -11,7 +11,12 @@ export default fp( async(fastify)=>{
 
     try {
       console.log("here")
-      const decoded = await fastify.jwt.verify(token);
+      const decoded = fastify.jwt.verify(token);
+      const user = await fastify.prisma.user.findUnique({ where: { id: decoded.userId } })
+      if (!user) {
+        return reply.code(401).send({ message: 'User not found' })
+      }
+
       request.userId = decoded.userId
     } catch (error) {
       return reply.code(500).send({ message: 'Internal Server Error' });
