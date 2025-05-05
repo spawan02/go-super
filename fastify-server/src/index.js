@@ -17,7 +17,6 @@ fastify.register(authPlugin);
 fastify.register(fastifyJwt, { secret: process.env.JWT_PASSWORD });
 fastify.register(authRoutes, {prefix: "/api"});
 fastify.register(expenseRoutes, {prefix: "/api"});
-
 fastify.listen({ port: 3000 }, (err, address) => {
     if (err) throw err;
     fastify.log.info(`Server running at ${address}`);
