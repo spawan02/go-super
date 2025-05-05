@@ -23,16 +23,16 @@ export default async function (fastify) {
                         password: hashed,
                     },
                 });
+                reply.send({
+                    message: "user registered",
+                    userId: user.id,
+                });
             } catch (e) {
                 fastify.log.error(error);
                 return reply
                     .code(500)
                     .send({ message: "Internal server error" });
             }
-            reply.send({
-                message: "user registered",
-                userId: user.id,
-            });
         },
     });
 
