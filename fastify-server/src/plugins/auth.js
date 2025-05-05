@@ -10,7 +10,6 @@ export default fp( async(fastify)=>{
     }
 
     try {
-      console.log("here")
       const decoded = fastify.jwt.verify(token);
       const user = await fastify.prisma.user.findUnique({ where: { id: decoded.userId } })
       if (!user) {

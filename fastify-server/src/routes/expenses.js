@@ -62,6 +62,7 @@ export default async function (fastify) {
                         category: expense.category,
                         description: expense.description,
                         createdAt: expense.createdAt,
+                        userId: expense.userId
                     },
                 });
             } catch (err) {
