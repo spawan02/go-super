@@ -7,7 +7,7 @@ import {
 export default async function (fastify) {
     fastify.get("/expenses", {
         schema: getExpensesSchema,
-        preHandler: [fastify.authenticate],
+        preHandler: fastify.authenticate,
         handler: async (request, reply) => {
             try {
                 const userId = request.userId;
@@ -33,7 +33,7 @@ export default async function (fastify) {
     });
 
     fastify.post("/expenses", {
-        preHandler: [fastify.authenticate],
+        preHandler: fastify.authenticate,
         schema: createExpenseSchema,
 
         handler: async (request, reply) => {
@@ -66,7 +66,7 @@ export default async function (fastify) {
     });
 
     fastify.delete("/expenses/:id", {
-        preHandler: [fastify.authenticate],
+        preHandler: fastify.authenticate,
         schema: deleteExpenseSchema,
         handler: async (request, reply) => {
             try {

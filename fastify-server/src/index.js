@@ -12,8 +12,8 @@ const fastify = Fastify({ logger: true });
 fastify.register(fastifyCors, {
     origin: "*",
 });
-fastify.register(authPlugin);
 fastify.register(prismaPlugin);
+fastify.register(authPlugin);
 fastify.register(fastifyJwt, { secret: process.env.JWT_PASSWORD });
 fastify.register(authRoutes, {prefix: "/api"});
 fastify.register(expenseRoutes, {prefix: "/api"});
